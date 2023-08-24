@@ -5,6 +5,7 @@ import 'package:freeshare/source_code/model/product.dart';
 import 'package:freeshare/theme/component/cart_button.dart';
 import 'package:freeshare/theme/component/color_picker.dart';
 import 'package:freeshare/theme/component/pop_button.dart';
+import 'package:freeshare/theme/component/toast/toast.dart';
 import 'package:freeshare/util/lang/generated/l10n.dart';
 import 'package:provider/provider.dart';
 
@@ -55,6 +56,7 @@ class _ProductViewState extends State<ProductView> {
       product: widget.product,
     );
     cartService.add(newCartItem);
+    Toast.show(S.current.productAdded(widget.product.name));
   }
 
   @override
