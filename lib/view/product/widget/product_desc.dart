@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freeshare/service/theme_service.dart';
-import 'package:freeshare/source_code/model/product.dart';
+import 'package:freeshare/src/model/product.dart';
 import 'package:freeshare/theme/component/rating.dart';
 import 'package:freeshare/util/lang/generated/l10n.dart';
 

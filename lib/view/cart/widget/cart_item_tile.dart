@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:freeshare/service/theme_service.dart';
-import 'package:freeshare/source_code/model/cart_item.dart';
+import 'package:freeshare/src/model/cart_item.dart';
 import 'package:freeshare/theme/component/asset_icon.dart';
 import 'package:freeshare/theme/component/button/counter_button.dart';
 import 'package:freeshare/util/helper/intl_helper.dart';

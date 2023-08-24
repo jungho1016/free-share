@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freeshare/source_code/model/product.dart';
+import 'package:freeshare/src/model/product.dart';
 import 'package:freeshare/theme/component/constrained_screen.dart';
 import 'package:freeshare/view/cart/cart_view.dart';
 import 'package:freeshare/view/product/product_view.dart';

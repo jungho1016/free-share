@@ -1,4 +1,4 @@
-import 'package:freeshare/source_code/model/lang.dart';
+import 'package:freeshare/src/model/lang.dart';
 
 import 'product_color.dart';
 

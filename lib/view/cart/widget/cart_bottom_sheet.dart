@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freeshare/service/theme_service.dart';
-import 'package:freeshare/source_code/model/cart_item.dart';
+import 'package:freeshare/src/model/cart_item.dart';
 import 'package:freeshare/theme/component/bottom_sheet/base_bottom_sheet.dart';
 import 'package:freeshare/theme/component/button/button.dart';
 import 'package:freeshare/theme/resource/layout.dart';

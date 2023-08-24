@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freeshare/source_code/model/cart_item.dart';
+import 'package:freeshare/src/model/cart_item.dart';
 import 'package:freeshare/util/helper/immutable_helper.dart';
 
 class CartService with ChangeNotifier {
