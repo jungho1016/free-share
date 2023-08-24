@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freeshare/theme/dark_theme.dart';
 import 'package:freeshare/theme/foundation/app_theme.dart';
 import 'package:freeshare/theme/light_theme.dart';
+import 'package:freeshare/theme/resource/layout.dart';
 import 'package:provider/provider.dart';
 
 class ThemeService with ChangeNotifier {
@@ -25,24 +26,28 @@ class ThemeService with ChangeNotifier {
   /// Material ThemeData 커스텀
   ThemeData get themeData {
     return ThemeData(
+      /// Scaffold
+      scaffoldBackgroundColor: theme.color.surface,
 
-        /// Scaffold
-        scaffoldBackgroundColor: theme.color.surface,
-
-        /// AppBar
-        appBarTheme: AppBarTheme(
-          backgroundColor: theme.color.surface,
-          elevation: 0,
-          centerTitle: false,
-          iconTheme: IconThemeData(
-            color: theme.color.text,
-          ),
-          titleTextStyle: theme.typo.headline2.copyWith(
-            color: theme.color.text,
-          ),
+      /// AppBar
+      appBarTheme: AppBarTheme(
+        backgroundColor: theme.color.surface,
+        elevation: 0,
+        centerTitle: false,
+        iconTheme: IconThemeData(
+          color: theme.color.text,
         ),
-        bottomSheetTheme:
-            const BottomSheetThemeData(backgroundColor: Colors.transparent));
+        titleTextStyle: theme.typo.headline2.copyWith(
+          color: theme.color.text,
+        ),
+      ),
+      bottomSheetTheme: const BottomSheetThemeData(
+        backgroundColor: Colors.transparent,
+        constraints: BoxConstraints(
+          maxWidth: Breakpoints.bottomSheet,
+        ),
+      ),
+    );
   }
 }
 

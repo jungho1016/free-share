@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:freeshare/source_code/model/product.dart';
+import 'package:freeshare/theme/resource/layout.dart';
 
 import 'product_card.dart';
 
@@ -15,7 +16,11 @@ class ProductCardGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MasonryGridView.count(
-      crossAxisCount: 2,
+      crossAxisCount: context.layout(
+        2,
+        tablet: 3,
+        desktop: 4,
+      ),
       mainAxisSpacing: 24,
       crossAxisSpacing: 16,
       padding: const EdgeInsets.symmetric(

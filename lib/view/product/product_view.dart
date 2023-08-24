@@ -7,6 +7,7 @@ import 'package:freeshare/theme/component/color_picker.dart';
 import 'package:freeshare/theme/component/pop_button.dart';
 import 'package:freeshare/theme/component/toast/toast.dart';
 import 'package:freeshare/util/lang/generated/l10n.dart';
+import 'package:freeshare/view/shopping/widget/product_layout.dart';
 import 'package:provider/provider.dart';
 
 import 'widget/product_bottom_sheet.dart';
@@ -67,48 +68,45 @@ class _ProductViewState extends State<ProductView> {
         leading: const PopButton(),
         titleSpacing: 0,
         actions: const [
+          /// 카트 버튼
           CartButton(),
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(vertical: 32),
-              child: Wrap(
-                runSpacing: 32,
-                alignment: WrapAlignment.center,
-                children: [
-                  /// ProductColorPreview
-                  ProductColorPreview(
-                    colorIndex: colorIndex,
-                    product: widget.product,
-                  ),
-
-                  /// ColorPicker
-                  ColorPicker(
-                    colorIndex: colorIndex,
-                    colorList: widget.product.productColorList.map((e) {
-                      return e.color;
-                    }).toList(),
-                    onColorSelected: onColorIndexChanged,
-                  ),
-
-                  /// ProductDesc
-                  ProductDesc(product: widget.product),
-                ],
+      body: ProductLayout(
+        productInfo: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(vertical: 32),
+          child: Wrap(
+            runSpacing: 32,
+            alignment: WrapAlignment.center,
+            children: [
+              /// ProductColorPreview
+              ProductColorPreview(
+                colorIndex: colorIndex,
+                product: widget.product,
               ),
-            ),
-          ),
 
-          /// ProductBottomSheet
-          ProductBottomSheet(
-            count: count,
-            product: widget.product,
-            onCountChanged: onCountChanged,
-            onAddToCartPressed: onAddToCartPressed,
+              /// ColorPicker
+              ColorPicker(
+                colorIndex: colorIndex,
+                colorList: widget.product.productColorList.map((e) {
+                  return e.color;
+                }).toList(),
+                onColorSelected: onColorIndexChanged,
+              ),
+
+              /// ProductDesc
+              ProductDesc(product: widget.product),
+            ],
           ),
-        ],
+        ),
+
+        /// ProductBottomSheet
+        productBottomSheet: ProductBottomSheet(
+          count: count,
+          product: widget.product,
+          onCountChanged: onCountChanged,
+          onAddToCartPressed: onAddToCartPressed,
+        ),
       ),
     );
   }

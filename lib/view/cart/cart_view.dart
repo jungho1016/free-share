@@ -12,6 +12,7 @@ import 'widget/cart_bottom_sheet.dart';
 import 'widget/cart_checkout_dialog.dart';
 import 'widget/cart_delete_dialog.dart';
 import 'widget/cart_item_tile.dart';
+import 'widget/cart_layout.dart';
 
 class CartView extends StatelessWidget {
   const CartView({super.key});
@@ -25,8 +26,10 @@ class CartView extends StatelessWidget {
         leading: const PopButton(),
         titleSpacing: 0,
         actions: [
+          /// Delete Button
           Button(
             onPressed: () {
+              /// Show delete dialog
               showDialog(
                 context: context,
                 builder: (context) {
@@ -46,63 +49,64 @@ class CartView extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: cartService.cartItemList.isEmpty
-                ? const CartEmpty()
-                : ListView.builder(
-                    itemCount: cartService.cartItemList.length,
-                    itemBuilder: (context, index) {
-                      final cartItem = cartService.cartItemList[index];
-                      return CartItemTile(
-                        cartItem: cartItem,
-                        onPressed: () {
-                          cartService.update(
-                            index,
-                            cartItem.copyWith(
-                              isSelected: !cartItem.isSelected,
-                            ),
-                          );
-                        },
-                        onCountChanged: (count) {
-                          cartService.update(
-                            index,
-                            cartItem.copyWith(
-                              count: count,
-                            ),
-                          );
-                        },
+      body: CartLayout(
+        /// CartItemList
+        cartItemList: cartService.cartItemList.isEmpty
+            ? const CartEmpty()
+            : ListView.builder(
+                itemCount: cartService.cartItemList.length,
+                itemBuilder: (context, index) {
+                  final cartItem = cartService.cartItemList[index];
+                  return CartItemTile(
+                    cartItem: cartItem,
+                    onPressed: () {
+                      cartService.update(
+                        index,
+                        cartItem.copyWith(
+                          isSelected: !cartItem.isSelected,
+                        ),
                       );
                     },
-                  ),
-          ),
-          CartBottomSheet(
-            totalPrice: cartService.selectedCartItemList.isEmpty
-                ? '0'
-                : IntlHelper.currency(
-                    symbol: cartService
-                        .selectedCartItemList.first.product.priceUnit,
-                    number:
-                        cartService.selectedCartItemList.fold(0, (prev, curr) {
-                      return prev + curr.count * curr.product.price;
-                    }),
-                  ),
-            selectedCartItemList: cartService.selectedCartItemList,
-            onCheckoutPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return CartCheckoutDialog(
-                    onCheckoutPressed: () {
-                      cartService.delete(cartService.selectedCartItemList);
+                    onCountChanged: (count) {
+                      cartService.update(
+                        index,
+                        cartItem.copyWith(
+                          count: count,
+                        ),
+                      );
                     },
                   );
                 },
-              );
-            },
-          ),
-        ],
+              ),
+
+        /// CartBottomSheet
+        cartBottomSheet: CartBottomSheet(
+          totalPrice: cartService.selectedCartItemList.isEmpty
+              ? '0'
+              : IntlHelper.currency(
+                  symbol:
+                      cartService.selectedCartItemList.first.product.priceUnit,
+                  number:
+                      cartService.selectedCartItemList.fold(0, (prev, curr) {
+                    return prev + curr.count * curr.product.price;
+                  }),
+                ),
+          selectedCartItemList: cartService.selectedCartItemList,
+          onCheckoutPressed: () {
+            /// Show checkout dialog
+            showDialog(
+              context: context,
+              builder: (context) {
+                return CartCheckoutDialog(
+                  onCheckoutPressed: () {
+                    cartService.delete(cartService.selectedCartItemList);
+                    Toast.show(S.current.checkoutDialogSuccessToast);
+                  },
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }
